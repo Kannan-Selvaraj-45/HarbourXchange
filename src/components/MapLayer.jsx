@@ -10,71 +10,86 @@ import Feature from "ol/Feature";
 import Point from "ol/geom/Point";
 import { fromLonLat } from "ol/proj";
 import { Icon, Style } from "ol/style";
-import {
-  MouseWheelZoom,
-  defaults as defaultInteractions,
-} from "ol/interaction";
 
+// Port coordinates
 const ports = [
-  { name: "JNPT", coordinates: [72.9492, 18.949] },
-  { name: "Chennai", coordinates: [80.2949, 13.1022] },
-  { name: "Visakhapatnam", coordinates: [83.2875, 17.6868] },
-  { name: "Cochin", coordinates: [76.2673, 9.9658] },
-  { name: "Kandla", coordinates: [70.2167, 23.0333] },
-  { name: "Mundra", coordinates: [69.7047, 22.8387] },
+  { name: "JNPT", coordinates: fromLonLat([72.9492, 18.949]) },
+  { name: "Chennai", coordinates: fromLonLat([80.2949, 13.1022]) },
+  { name: "Visakhapatnam", coordinates: fromLonLat([83.2875, 17.6868]) },
+  { name: "Cochin", coordinates: fromLonLat([76.2673, 9.9658]) },
+  { name: "Kandla", coordinates: fromLonLat([70.2167, 23.0333]) },
+  { name: "Mundra", coordinates: fromLonLat([69.7047, 22.8387]) },
 ];
-const vessels = [
-  { name: "Vessel 1", coordinates: [73.5, 18.5] },
-  { name: "Vessel 2", coordinates: [80.5, 13.5] },
-  { name: "Vessel 3", coordinates: [83.5, 17.5] },
-  { name: "Vessel 4", coordinates: [76.5, 10.0] },
-  { name: "Vessel 5", coordinates: [70.5, 23.5] },
-  { name: "Vessel 6", coordinates: [69.5, 22.5] },
+
+// Vessel places (example coordinates)
+const vesselPlaces = [
+  { name: "Vessel 1", coordinates: fromLonLat([73.5, 18.5]) },
+  { name: "Vessel 2", coordinates: fromLonLat([80.5, 13.5]) },
+  { name: "Vessel 3", coordinates: fromLonLat([83.5, 17.5]) },
+  { name: "Vessel 4", coordinates: fromLonLat([76.5, 10.0]) },
+  { name: "Vessel 5", coordinates: fromLonLat([70.5, 23.5]) },
+  { name: "Vessel 6", coordinates: fromLonLat([69.5, 22.5]) },
 ];
 
 const MapLayer = () => {
   const mapRef = useRef(null);
   const [map, setMap] = useState(null);
-  const [visibility, setVisibility] = useState({ ports: true, vessels: false });
+  const [showPorts, setShowPorts] = useState(true);
+  const [showVessels, setShowVessels] = useState(false);
+  const [portLayer, setPortLayer] = useState(null);
+  const [vesselLayer, setVesselLayer] = useState(null);
 
-  const createLayer = (data, style, visible) => {
-    const features = data.map(
-      ({ coordinates, name }) =>
-        new Feature({
-          geometry: new Point(fromLonLat(coordinates)),
-          name,
-        })
-    );
-    return new VectorLayer({
-      source: new VectorSource({ features }),
-      style,
-      visible,
-    });
-  };
+  const portStyle = new Style({
+    image: new Icon({
+      anchor: [0.6, 0.5],
+      src: "/port-icon.png",
+      scale: 0.03,
+    }),
+  });
+
+  const vesselStyle = new Style({
+    image: new Icon({
+      anchor: [0.6, 0.5],
+      src: "/vessel-icon.png",
+      scale: 0.05,
+    }),
+  });
 
   useEffect(() => {
     if (!mapRef.current) return;
 
-    const portStyle = new Style({
-      image: new Icon({
-        anchor: [0.6, 0.5],
-        src: "/port-icon.png",
-        scale: 0.03,
-      }),
-    });
-    const vesselStyle = new Style({
-      image: new Icon({
-        anchor: [0.6, 0.5],
-        src: "/vessel-icon.png",
-        scale: 0.05,
-      }),
+    const portFeatures = ports.map(
+      (port) =>
+        new Feature({
+          geometry: new Point(port.coordinates),
+          name: port.name,
+        })
+    );
+
+    const vesselFeatures = vesselPlaces.map(
+      (vessel) =>
+        new Feature({
+          geometry: new Point(vessel.coordinates),
+          name: vessel.name,
+        })
+    );
+
+    const portVectorSource = new VectorSource({
+      features: portFeatures,
     });
 
-    const portLayer = createLayer(ports, portStyle, visibility.ports);
-    const vesselLayer = createLayer(vessels, vesselStyle, visibility.vessels);
+    const vesselVectorSource = new VectorSource({
+      features: vesselFeatures,
+    });
 
-    const mouseWheelZoomInteraction = new MouseWheelZoom({
-      condition: (event) => event.originalEvent.ctrlKey,
+    const portVectorLayer = new VectorLayer({
+      source: portVectorSource,
+      style: portStyle,
+    });
+
+    const vesselVectorLayer = new VectorLayer({
+      source: vesselVectorSource,
+      style: vesselStyle,
     });
 
     const initialMap = new Map({
@@ -86,8 +101,8 @@ const MapLayer = () => {
             maxZoom: 19,
           }),
         }),
-        portLayer,
-        vesselLayer,
+        portVectorLayer,
+        vesselVectorLayer,
       ],
       view: new View({
         center: fromLonLat([78.9629, 25.5937]),
@@ -95,41 +110,41 @@ const MapLayer = () => {
         minZoom: 2,
         maxZoom: 19,
       }),
-      interactions: defaultInteractions({ mouseWheelZoom: false }).extend([
-        mouseWheelZoomInteraction,
-      ]),
     });
 
     setMap(initialMap);
-    return () => initialMap.setTarget(null);
+    setPortLayer(portVectorLayer);
+    setVesselLayer(vesselVectorLayer);
+
+    return () => initialMap.setTarget(undefined);
   }, []);
 
   useEffect(() => {
-    if (map) {
-      map.getLayers().forEach((layer) => {
-        if (layer instanceof VectorLayer) {
-          const source = layer.getSource();
-          const feature = source.getFeatures()[0];
-          if (feature) {
-            const isPort = ports.some(
-              (port) => port.name === feature.get("name")
-            );
-            layer.setVisible(isPort ? visibility.ports : visibility.vessels);
-          }
-        }
-      });
+    if (portLayer) {
+      portLayer.setVisible(showPorts);
     }
-  }, [map, visibility]);
+  }, [showPorts, portLayer]);
 
-  const handleLayerToggle = (layerType) =>
-    setVisibility((prev) => ({ ...prev, [layerType]: !prev[layerType] }));
+  useEffect(() => {
+    if (vesselLayer) {
+      vesselLayer.setVisible(showVessels);
+    }
+  }, [showVessels, vesselLayer]);
+
+  const handleShowPortsChange = (event) => {
+    setShowPorts(event.target.checked);
+  };
+
+  const handleShowVesselsChange = (event) => {
+    setShowVessels(event.target.checked);
+  };
 
   return (
     <div>
       <div
         ref={mapRef}
         style={{ width: "100vw", height: "100vh", position: "relative" }}
-      />
+      ></div>
       <form
         className="form-inline"
         style={{
@@ -140,41 +155,45 @@ const MapLayer = () => {
           backgroundColor: "white",
           padding: "10px",
           display: "flex",
-          flexDirection: "row",
-          gap: "10px",
+          justifyContent: "center",
           alignItems: "center",
-          
         }}
       >
         <label
           className="checkbox"
           htmlFor="showPorts"
-          style={{ display: "flex", alignItems: "center"  }}
+          style={{
+            marginRight: "20px", // Adjust margin for spacing
+            display: "flex",
+            alignItems: "center",
+          }}
         >
           <input
             type="checkbox"
             id="showPorts"
-            checked={visibility.ports}
-            onChange={() => handleLayerToggle("ports")}
-            style={{ marginRight: "10px" }} 
+            checked={showPorts}
+            onChange={handleShowPortsChange}
           />
-            Ports
+          <span style={{ marginLeft: "5px" }}>Ports</span>
         </label>
         <label
           className="checkbox"
           htmlFor="showVessels"
-          style={{ display: "flex", alignItems: "center" }}
+          style={{
+            display: "flex",
+            alignItems: "center",
+          }}
         >
           <input
             type="checkbox"
             id="showVessels"
-            checked={visibility.vessels}
-            onChange={() => handleLayerToggle("vessels")}
-            style={{ marginRight: "10px" }}  
+            checked={showVessels}
+            onChange={handleShowVesselsChange}
           />
-           Vessels
+          <span style={{ marginLeft: "5px" }}>Vessels</span>
         </label>
       </form>
+      <div></div>
     </div>
   );
 };
