@@ -20,7 +20,7 @@ const Home = () => {
                 </div>
                 <NavLink to="/vessel">
                   <img
-                    src="./assets/images/big-ship.jpg"
+                    src="./public/images/big-ship.jpg"
                     alt="Residential"
                     className="img-fluid connect-image-services"
                   />

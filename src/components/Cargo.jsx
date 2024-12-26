@@ -6,7 +6,7 @@ const Cargo = () => {
           <div className="col-12">
             <h1 className="new-about-head">CARGO MOVEMENT</h1>
             <img
-              src="/assets/images/landungsbrucken-1494112.jpg"
+              src="/public/images/landungsbrucken-1494112.jpg"
               className="vessel-img"
               alt="Vessel"
             />
