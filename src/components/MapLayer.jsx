@@ -17,7 +17,6 @@ import {
   Stroke,
   Style,
   Text,
-  RegularShape,
 } from "ol/style";
 import { getVectorContext } from "ol/render";
 import { Draw, Modify } from "ol/interaction";
