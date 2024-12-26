@@ -6,7 +6,7 @@ const Market = () => {
           <div className="col-12">
             <h1 className="new-about-head">MARKETPLACE</h1>
             <img
-              src="/images/maritime_a_hero_d.jpg"
+              src="/images/landungsbrucken-1494112.jpg"
               className="vessel-img"
               alt="Vessel"
             />

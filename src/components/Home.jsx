@@ -68,12 +68,15 @@ const Home = () => {
           HarbourXchange is the disruption in the Indian digital marine
           marketplace connecting the demand and supply ends of marine assets
         </p>
-        <a className="more" href="./about.html">
-          LEARN MORE
-          <span>
-            <i className="fa-solid fa-greater-than greater"></i>
-          </span>
-        </a>
+
+        <NavLink to="/about" style={{ textDecoration: "none" }}>
+          <a className="more" href="/about" style={{ textDecoration: "none" }}>
+            LEARN MORE
+            <span>
+              <i className="fa-solid fa-greater-than greater"></i>
+            </span>
+          </a>
+        </NavLink>
       </div>
 
       <div className="container-fluid online-section row pb-0 pb-lg-4">
