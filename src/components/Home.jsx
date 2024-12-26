@@ -20,7 +20,7 @@ const Home = () => {
                 </div>
                 <NavLink to="/vessel">
                   <img
-                    src="./public/images/big-ship.jpg"
+                    src="/images/big-ship.jpg"
                     alt="Residential"
                     className="img-fluid connect-image-services"
                   />
@@ -36,7 +36,7 @@ const Home = () => {
                 </div>
                 <NavLink to="/market">
                   <img
-                    src="./public/images/new-bg.jpg"
+                    src="/images/new-bg.jpg"
                     alt="Roam"
                     className="img-fluid connect-image-services"
                   />
@@ -51,7 +51,7 @@ const Home = () => {
                 </div>
                 <NavLink to="/cargo">
                   <img
-                    src="./public/images/new-bg3.jpg"
+                    src="/images/new-bg3.jpg"
                     alt="Boats"
                     className="img-fluid connect-image-services"
                   />
@@ -79,7 +79,7 @@ const Home = () => {
       <div className="container-fluid online-section row pb-0 pb-lg-4">
         <div className="online-section-bg-container">
           <div className="col-12 col-lg-7 p-2 p-lg-0">
-            <img src="./public/images/new-bg1.jpg" className="online-image" />
+            <img src="/images/new-bg1.jpg" className="online-image" />
           </div>
           <div className="online-text-container col-12 col-lg-5 p-3 p-lg-5">
             <div className="">
@@ -129,7 +129,7 @@ const Home = () => {
 
             <div className="online-video-container col-lg-6 order-0 order-lg-1">
               <img
-                src="./public/images/new-bg3.jpg"
+                src="/images/new-bg3.jpg"
                 alt="Boats"
                 className="img-fluid connect-image-services"
               />
@@ -139,7 +139,7 @@ const Home = () => {
       </div>
 
       <div className="rocket-background d-none">
-        <img src="./public/images/home-boat.jpg" className="rocket-image" />
+        <img src="/images/home-boat.jpg" className="rocket-image" />
         <div className="rocket-text-container">
           <h1 className="rocket-heading">Engineered for Seamless Exchange</h1>
           <p className="rocket-description">

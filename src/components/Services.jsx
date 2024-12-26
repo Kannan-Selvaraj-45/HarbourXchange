@@ -19,7 +19,7 @@ const Services = () => {
               </div>
               <NavLink to="/vessel">
                 <img
-                  src="./public/images/big-ship.jpg"
+                  src="/images/big-ship.jpg"
                   alt="Residential"
                   className="img-fluid connect-image-services"
                 />
@@ -35,7 +35,7 @@ const Services = () => {
               </div>
               <NavLink to="/market">
                 <img
-                  src="./public/images/new-bg.jpg"
+                  src="/images/new-bg.jpg"
                   alt="Roam"
                   className="img-fluid connect-image-services"
                 />
@@ -50,7 +50,7 @@ const Services = () => {
               </div>
               <NavLink to="/cargo">
                 <img
-                  src="./public/images/new-bg3.jpg"
+                  src="/images/new-bg3.jpg"
                   alt="Boats"
                   className="img-fluid connect-image-services"
                 />

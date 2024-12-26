@@ -17,7 +17,7 @@ const Navbar = () => {
         <div className="d-flex justify-content-start">
           <a href="" className="new-logo">
             <img
-              src="./public/H.png"
+              src="/H.png"
               className="logo-img"
               style={{ backgroundColor: "transparent" }}
             />
