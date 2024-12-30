@@ -10,9 +10,7 @@ import Feature from "ol/Feature";
 import Point from "ol/geom/Point";
 import { fromLonLat } from "ol/proj";
 import { Icon, Style } from "ol/style";
-import { ChevronDown } from 'lucide-react';
 
-// Port coordinates
 const ports = [
   { name: "JNPT", coordinates: fromLonLat([72.9492, 18.949]) },
   { name: "Chennai", coordinates: fromLonLat([80.2949, 13.1022]) },
@@ -31,78 +29,6 @@ const vesselPlaces = [
   { name: "Vessel 5", coordinates: fromLonLat([70.5, 23.5]) },
   { name: "Vessel 6", coordinates: fromLonLat([69.5, 22.5]) },
 ];
-
-const ScrollIndicator = () => {
-  const [showScrollIndicator, setShowScrollIndicator] = useState(true);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 100) {
-        setShowScrollIndicator(false);
-      } else {
-        setShowScrollIndicator(true);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
-  const handleScrollClick = () => {
-    window.scrollTo({
-      top: window.innerHeight,
-      behavior: 'smooth'
-    });
-  };
-
-  if (!showScrollIndicator) {
-    return null;
-  }
-
-  return (
-    <div 
-      style={{
-        position: 'absolute',
-        bottom: '2rem',
-        left: '50%',
-        transform: 'translateX(-50%)',
-        cursor: 'pointer',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        color: 'rgba(75, 85, 99, 0.8)',
-        backgroundColor: 'rgba(255, 255, 255, 0.8)',
-        padding: '0.5rem 1rem',
-        borderRadius: '0.5rem',
-        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-        zIndex: 3,
-      }}
-      onClick={handleScrollClick}
-    >
-      <span style={{ fontSize: '0.875rem', fontWeight: '600', marginBottom: '0.5rem' }}>
-        Scroll for more
-      </span>
-      <ChevronDown style={{
-        width: '1.5rem',
-        height: '1.5rem',
-        animation: 'bounce 1s infinite',
-      }} />
-      <style jsx>{`
-        @keyframes bounce {
-          0%, 100% {
-            transform: translateY(0);
-          }
-          50% {
-            transform: translateY(-25%);
-          }
-        }
-      `}</style>
-    </div>
-  );
-};
 
 const MapLayer = () => {
   const mapRef = useRef(null);
@@ -236,7 +162,7 @@ const MapLayer = () => {
           className="checkbox"
           htmlFor="showPorts"
           style={{
-            marginRight: "20px", // Adjust margin for spacing
+            marginRight: "20px",
             display: "flex",
             alignItems: "center",
           }}
@@ -266,10 +192,8 @@ const MapLayer = () => {
           <span style={{ marginLeft: "5px" }}>Vessels</span>
         </label>
       </form>
-      <ScrollIndicator />
     </div>
   );
 };
 
 export default MapLayer;
-

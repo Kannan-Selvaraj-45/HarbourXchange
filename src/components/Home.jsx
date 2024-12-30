@@ -8,6 +8,7 @@ const Home = () => {
       <div id="home">
         <MapLayer />
       </div>
+      <div id="services"></div>
       <div className="container-fluid connect-section">
         <div className="container-fluid connect-section-services pt-1">
           <div className="row img-container">
@@ -131,11 +132,11 @@ const Home = () => {
               </p>
             </div>
 
-            <div className="online-video-container col-lg-6 order-0 order-lg-1">
+            <div className=" col-lg-7 order-0 order-lg-1 ">
               <img
                 src="/images/new-bg3.jpg"
                 alt="Boats"
-                className="img-fluid connect-image-services"
+                className="img-fluid bottom-connect-image-services"
               />
             </div>
           </div>
@@ -192,10 +193,17 @@ const Home = () => {
         </div>
       </footer>
 
-      <div className="scroll-icon-bg">
-        <a href="#home" className="scroll-icon-a">
-          <i className="fa-solid fa-angle-up"></i>
-        </a>
+      <div className="arrow-container">
+        <div className="scroll-icon-bg">
+          <a href="#home" className="scroll-icon-a">
+            <i className="fa-solid fa-angle-up"></i>
+          </a>
+        </div>
+        <div className="scroll-icon-bg">
+          <a href="#services" className="scroll-icon-a">
+            <i className="fa-solid fa-angle-down"></i>
+          </a>
+        </div>
       </div>
     </>
   );
