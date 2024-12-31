@@ -1,4 +1,9 @@
+import { useEffect } from "react";
+
 const Vessel = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
       <div className="container pt-5">

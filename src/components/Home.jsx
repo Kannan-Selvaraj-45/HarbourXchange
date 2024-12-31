@@ -1,15 +1,30 @@
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-
 import MapLayer from "./MapLayer";
 
 const Home = () => {
+  const [isAtTop, setIsAtTop] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      setIsAtTop(scrollPosition === 0);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <>
       <div id="home">
         <MapLayer />
       </div>
       <div id="services"></div>
-      <div className="container-fluid connect-section">
+      <div className="container-fluid connect-section p-2">
         <div className="container-fluid connect-section-services pt-1">
           <div className="row img-container">
             <div className="col-12 col-md-6 col-lg-4">
@@ -64,7 +79,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="container-fluid tag-container pt-2">
+      <div className="container-fluid tag-container p-3">
         <h1 className="connect-head tag-head">ABOUT HARBOURXCHANGE</h1>
         <p className="connect-description tag-description">
           HarbourXchange is the disruption in the Indian digital marine
@@ -184,26 +199,25 @@ const Home = () => {
         </div>
       </footer>
 
-      <footer className="footer-background mt-2">
+      <footer className="footer-background mt-2 d-flex justify-content-center">
         <div className="harbourCopy">HarbourXchange &copy; 2024</div>
-        <div>
-          <span className="email-label">
-            Interested in staying up to date with HarbourXchange?
-          </span>
-        </div>
+         
       </footer>
 
       <div className="arrow-container">
-        <div className="scroll-icon-bg">
-          <a href="#home" className="scroll-icon-a">
-            <i className="fa-solid fa-angle-up"></i>
-          </a>
-        </div>
-        <div className="scroll-icon-bg">
+        {isAtTop ? (
           <a href="#services" className="scroll-icon-a">
-            <i className="fa-solid fa-angle-down"></i>
+            <div className="scroll-icon-bg">
+              <i className="fa-solid fa-angle-down"></i>
+            </div>
           </a>
-        </div>
+        ) : (
+          <a href="#home" className="scroll-icon-a">
+            <div className="scroll-icon-bg">
+              <i className="fa-solid fa-angle-up"></i>
+            </div>
+          </a>
+        )}
       </div>
     </>
   );

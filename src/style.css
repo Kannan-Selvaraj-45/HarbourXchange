@@ -220,7 +220,6 @@ body {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
- 
 }
 .online-image {
   width: 100%;
@@ -254,15 +253,16 @@ body {
   margin-top: 10px;
 }
 .sky-button1 {
-  color: var(--heading-color);
-  border: 2px solid black;
-  background-color: transparent;
+  background-color: black;
+  color: white;
+
   font-size: 13px;
   font-weight: bold;
 }
 .sky-button1:hover {
-  background-color: black;
-  color: white;
+  color: var(--heading-color);
+  border: 2px solid black;
+  background-color: transparent;
 }
 .sky-button2:hover {
   background-color: black;
@@ -1552,9 +1552,9 @@ button:hover {
 }
 .arrow-container {
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-end;
   position: fixed;
-  right: 10px;
+  right: 5px;
   bottom: 10px;
   width: 100px;
 }
