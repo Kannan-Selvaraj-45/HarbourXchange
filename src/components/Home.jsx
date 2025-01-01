@@ -201,7 +201,6 @@ const Home = () => {
 
       <footer className="footer-background mt-2 d-flex justify-content-center">
         <div className="harbourCopy">HarbourXchange &copy; 2024</div>
-         
       </footer>
 
       <div className="arrow-container">
