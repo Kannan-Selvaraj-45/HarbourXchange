@@ -8,7 +8,7 @@ const About = () => {
     <>
       <div className="container new-about-bg">
         <h1 className="new-about-head new-head">HISTORY OF HARBOURXCHANGE</h1>
-        <p className="about-para">
+        <p className="about-para ">
           HarbourXChange was founded by Mr. Shrey Tayal, following his
           successful establishment of the Riverine Group, a leading marine
           company that operates a diverse fleet on the National Waterway and
