@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import { NavLink } from "react-router-dom";
 import MapLayer from "./MapLayer";
 
 const Home = () => {
   const [isAtTop, setIsAtTop] = useState(true);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -12,27 +16,38 @@ const Home = () => {
     };
 
     window.addEventListener("scroll", handleScroll);
-    window.scrollTo(0, 0);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
+  };
+
+  const fadeInLeft = {
+    hidden: { opacity: 0, x: -20 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.6, delay: 0.2 } },
+  };
+
   return (
-    <>
-      <div id="home">
+    <div className="bg-gray-100 overflow-hidden">
+      <section id="home" className="relative ">
         <MapLayer />
-      </div>
-      <div id="services"></div>
-      <div className="container-fluid connect-section p-2">
-        <div className="container-fluid connect-section-services pt-1">
-          <div className="row img-container">
-            <div className="col-12 col-md-6 col-lg-4">
-              <div className="connect-card-services">
-                <div className="connect-container">
-                  <h2 className="connect-head">Vessel Management</h2>
-                  <p className="connect-description">
+      </section>
+      <div id="services" className="pt-5 bg-white"></div>
+      <div className="container-fluid pt-5 pb-5  min-h-[45vh] bg-white">
+        <div className="container-fluid pt-1 min-h-[45vh]">
+          <div className="flex gap-3 px-0 pr-2.5 w-[101%] ">
+            <div className="w-1/3 shadow-xl ">
+              <div
+                className="relative w-full overflow-hidden "
+                style={{ borderRadius: "10px" }}
+              >
+                <div className="absolute top-5 left-5 text-white z-10 ">
+                  <h2 className="connect-head font-bold text-4xl ">
+                    Vessel Management
+                  </h2>
+                  <p className="connect-description text-lg">
                     FUEL | RPM | HOUR | CREW | DOCUMENT
                   </p>
                 </div>
@@ -40,38 +55,51 @@ const Home = () => {
                   <img
                     src="/images/big-ship.jpg"
                     alt="Residential"
-                    className="img-fluid connect-image-services"
+                    className=" w-full h-[67vh] object-cover transition-transform duration-400 ease-in-out hover:scale-[1.06] cursor-pointer "
                   />
                 </NavLink>
               </div>
             </div>
 
-            <div className="col-12 mt-1 mt-lg-0 col-md-6 col-lg-4">
-              <div className="connect-card-services">
-                <div className="connect-container">
-                  <h2 className="connect-head">Marketplace</h2>
-                  <p className="connect-description">PROJECT | TOWAGE</p>
+            <div className="w-1/3 shadow-xl">
+              <div
+                className="relative w-full overflow-hidden"
+                style={{ borderRadius: "10px" }}
+              >
+                <div className="absolute top-5 left-5 text-white z-10">
+                  <h2 className="connect-head font-bold text-4xl">
+                    Marketplace
+                  </h2>
+                  <p className="connect-description text-lg">
+                    PROJECT | TOWAGE
+                  </p>
                 </div>
                 <NavLink to="/market">
                   <img
                     src="/images/new-bg.jpg"
                     alt="Roam"
-                    className="img-fluid connect-image-services"
+                    className="w-full h-[67vh] object-cover transition-transform duration-400 ease-in-out hover:scale-[1.06] cursor-pointer"
                   />
                 </NavLink>
               </div>
             </div>
-            <div className="col-12 mt-1 mt-lg-0 col-md-6 col-lg-4">
-              <div className="connect-card-services">
-                <div className="connect-container">
-                  <h2 className="connect-head">Cargo Movement</h2>
-                  <p className="connect-description">COASTAL | RIVER</p>
+
+            <div className="w-1/3 mr-3 shadow-xl">
+              <div
+                className="relative w-full overflow-hidden"
+                style={{ borderRadius: "10px" }}
+              >
+                <div className="absolute top-5 left-5 text-white z-10">
+                  <h2 className="connect-head font-bold text-4xl">
+                    Cargo Movement
+                  </h2>
+                  <p className="connect-description text-lg">COASTAL | RIVER</p>
                 </div>
                 <NavLink to="/cargo">
                   <img
                     src="/images/new-bg3.jpg"
                     alt="Boats"
-                    className="img-fluid connect-image-services"
+                    className="w-full h-[67vh] object-cover transition-transform duration-400 ease-in-out hover:scale-[1.06] cursor-pointer"
                   />
                 </NavLink>
               </div>
@@ -80,146 +108,184 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="container-fluid tag-container p-3">
-        <h1 className="connect-head tag-head">ABOUT HARBOURXCHANGE</h1>
-        <p className="connect-description tag-description">
-          HarbourXchange is the disruption in the Indian digital marine
-          marketplace connecting the demand and supply ends of marine assets
-        </p>
-
-        <NavLink to="/about" style={{ textDecoration: "none" }}>
-          <a className="more" href="/about" style={{ textDecoration: "none" }}>
-            LEARN MORE
-            <span>
-              <i className="fa-solid fa-greater-than greater"></i>
-            </span>
-          </a>
-        </NavLink>
-      </div>
-
-      <div className="container-fluid online-section row pb-0 pb-lg-4">
-        <div className="online-section-bg-container">
-          <div className="col-12 col-lg-7 p-2 p-lg-0">
-            <img src="/images/new-bg1.jpg" className="online-image" />
+      <section className="py-24 bg-gradient-to-br from-blue-600 to-indigo-800 text-white overflow-hidden">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeInUp}
+              className="text-center mb-12"
+            >
+              <h2 className="text-4xl font-bold mb-6 leading-tight">
+                Revolutionizing the
+                <span className="block text-5xl bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-orange-500">
+                  Indian Marine Marketplace
+                </span>
+              </h2>
+            </motion.div>
+            <motion.p
+              variants={fadeInLeft}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="text-xl mb-10 leading-relaxed text-blue-100"
+            >
+              HarbourXchange is disrupting the Indian digital marine marketplace
+              by seamlessly connecting the demand and supply ends of marine
+              assets. Our innovative platform empowers businesses and
+              individuals in the marine industry to thrive in the digital age.
+            </motion.p>
+            <motion.div
+              variants={fadeInUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="text-center"
+            >
+              <NavLink
+                to="/about"
+                className="inline-flex decoration-transparent items-center px-8 py-3 rounded-full text-lg font-semibold bg-white text-blue-600 hover:bg-blue-50 transition duration-300 ease-in-out transform hover:scale-105 shadow-lg"
+              >
+                Learn More
+                <i className="fas fa-arrow-right ml-2"></i>
+              </NavLink>
+            </motion.div>
           </div>
-          <div className="online-text-container col-12 col-lg-5 p-3 p-lg-5">
-            <div className="">
-              <h1 className="online-head">LAUNCH YOUR EXCHANGE IN MINUTES</h1>
-              <p className="online-description">
-                Set up HarbourXchange in 2 Simple Steps:
-              </p>
-            </div>
-            <div className="plug-point-container">
-              <h1 className="plug">1 CONNECT YOUR DEVICE</h1>
-              <h1 className="plug">2 ACCESS THE NETWORK</h1>
-            </div>
-            <div className="">
-              <p className="sky-description">
+        </div>
+      </section>
+
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col lg:flex-row items-center">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeInUp}
+              className="lg:w-1/2 mb-8 lg:mb-0"
+            >
+              <img
+                src="/images/new-bg1.jpg"
+                alt="Launch your exchange"
+                className="rounded-lg shadow-xl"
+              />
+            </motion.div>
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeInUp}
+              className="lg:w-1/2 lg:pl-16"
+            >
+              <h2 className="text-3xl font-bold mb-4">
+                Launch Your Exchange in Minutes
+              </h2>
+              <p className="mb-4">Set up HarbourXchange in 2 Simple Steps:</p>
+              <ol className="list-decimal list-inside mb-8">
+                <li className="mb-2">CONNECT YOUR DEVICE</li>
+                <li>ACCESS THE NETWORK</li>
+              </ol>
+              <p className="mb-8">
                 HarbourXchange requires an unobstructed view of the sky.
                 Download the HarbourXchange app to find the ideal installation
                 location.
               </p>
-              <div className="sky-button-container">
-                <button className="sky-button1">
+              <div className="flex flex-col sm:flex-row gap-4">
+                <button className="bg-black text-white font-bold py-3 px-6 rounded-full hover:bg-gray-800 transition duration-300">
                   DOWNLOAD FOR ANDROID
-                  <i className="fa-solid fa-greater-than greater"></i>
                 </button>
-                <button className="sky-button2">
+                <button className="bg-blue-600 text-white font-bold py-3 px-6 rounded-full hover:bg-blue-700 transition duration-300">
                   DOWNLOAD FOR IOS
-                  <i className="fa-solid fa-greater-than greater"></i>
                 </button>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div className="container-fluid">
-        <div className="row">
-          <div className="online-section-bg-container2">
-            <div className="contract-text-container p-3 p-lg-0 col-lg-6 order-1 order-lg-0">
-              <h1 className="contract-head">VESSEL INSIGHT MARKETPLACE</h1>
-              <p className="contract-description">
-                Digitalizing marine time operations requires not only powerful
-                applications, but also a secure data infrastructure providing
-                cost-efficient access to reliable and high-quality data. Thus,
-                all applications on the Vessel Insight Marketplace are supported
-                by Kongsberg Vessel Insight data infrastructure.
+      <section className="py-20 bg-gray-100">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col lg:flex-row items-center">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeInUp}
+              className="lg:w-1/2 lg:pr-16 mb-8 lg:mb-0"
+            >
+              <h2 className="text-3xl font-bold mb-4">
+                Vessel Insight Marketplace
+              </h2>
+              <p className="text-lg">
+                Digitalizing maritime operations requires not only powerful
+                applications but also a secure data infrastructure providing
+                cost-efficient access to reliable and high-quality data. All
+                applications on the Vessel Insight Marketplace are supported by
+                Kongsberg Vessel Insight data infrastructure.
               </p>
-            </div>
-
-            <div className=" col-lg-7 order-0 order-lg-1 ">
+            </motion.div>
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeInUp}
+              className="lg:w-1/2"
+            >
               <img
                 src="/images/new-bg3.jpg"
-                alt="Boats"
-                className="img-fluid bottom-connect-image-services"
+                alt="Vessel Insight"
+                className="rounded-lg shadow-xl"
               />
-            </div>
+            </motion.div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div className="rocket-background d-none">
-        <img src="/images/home-boat.jpg" className="rocket-image" />
-        <div className="rocket-text-container">
-          <h1 className="rocket-heading">Engineered for Seamless Exchange</h1>
-          <p className="rocket-description">
-            As the world leading provider of cutting-edge exchange solutions –
-            and the only platform with seamless, high-performance integration –
-            Harbour Exchange brings unmatched expertise in digital transactions
-            and operational efficiency.
-          </p>
-          <button className="rocket-button">LEARN MORE</button>
-        </div>
-      </div>
-
-      <footer className="footer-background d-none">
-        <div className="harbourCopy">HarbourXchange &copy; 2024</div>
-        <div className="right-footer-container col-12 col-lg-6 order-0 order-lg-1">
-          <div className="right-footer">
-            <div className="email-container">
-              <span className="email-label">
-                Interested in staying up to date with HarbourXchange?
-              </span>
-              <div className="input-container">
-                <input type="email" id="email" className="input" required />
-                <label className="label">Email</label>
-              </div>
-
-              <a href="" className="sign-up">
-                SIGN UP
-                <i className="fa-solid fa-greater-than greater-sign"></i>
-              </a>
+      <footer className="bg-gray-800 text-white py-12">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <div className="mb-6 md:mb-0">
+              <h3 className="text-2xl font-bold mb-2">HarbourXchange</h3>
+              <p>&copy; 2024 HarbourXchange. All rights reserved.</p>
             </div>
-            <div className="agree-container">
-              <span className="signup-content">
-                By clicking Sign Up, you agree to our Privacy Policy
-              </span>
+            <div className="flex space-x-6">
+              {["facebook", "twitter", "linkedin", "instagram"].map(
+                (social) => (
+                  <a
+                    key={social}
+                    href={`https://${social}.com`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-2xl hover:text-blue-400 transition duration-300"
+                  >
+                    <i className={`fab fa-${social}`}></i>
+                  </a>
+                )
+              )}
             </div>
           </div>
         </div>
       </footer>
 
-      <footer className="footer-background mt-2 d-flex justify-content-center">
-        <div className="harbourCopy">HarbourXchange &copy; 2024</div>
-      </footer>
-
-      <div className="arrow-container">
-        {isAtTop ? (
-          <a href="#services" className="scroll-icon-a">
-            <div className="scroll-icon-bg">
-              <i className="fa-solid fa-angle-down"></i>
-            </div>
-          </a>
-        ) : (
-          <a href="#home" className="scroll-icon-a">
-            <div className="scroll-icon-bg">
-              <i className="fa-solid fa-angle-up"></i>
-            </div>
-          </a>
-        )}
-      </div>
-    </>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="fixed bottom-5 right-3"
+        style={{ zIndex: 9999 }}
+      >
+        <a
+          href={isAtTop ? "#services" : "#home"}
+          className={`bg-violet-600 text-white   p-3 ml-auto mx-auto decoration-transparent rounded-2xl shadow-lg hover:bg-violet-700 transition duration-300 flex items-center justify-center`}
+        >
+          <i
+            className={`fas fa-chevron-${isAtTop ? "down" : "up"} text-sm`}
+          ></i>
+        </a>
+      </motion.div>
+    </div>
   );
 };
 

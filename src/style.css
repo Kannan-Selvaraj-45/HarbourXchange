@@ -15,6 +15,7 @@ html {
   padding: 0;
   box-sizing: border-box;
 }
+ 
 body {
   font-family: "Roboto", Helvetica, Arial, Verdana, sans-serif;
   font-weight: 400;
@@ -888,16 +889,7 @@ h6 {
   padding: 50px 0;
   background-image: url("https://crm.ktt.io:8443/website/vov/hosting/images/pattern-dark.png");
 }
-.new-about-head {
-  font-size: 32px;
-  padding-bottom: 5px;
-  padding-top: 50px !important;
-  text-align: center;
-  letter-spacing: 1px;
-  color: #333333;
-  align-self: flex-start;
-  padding-bottom: 30px;
-}
+ 
 .new-serv {
   padding-top: 25px;
 }

@@ -63,9 +63,9 @@ const MapLayer = () => {
   }, []);
 
   const vesselIcon = new L.Icon({
-    iconUrl: "/vessel-icon.png",
-    iconSize: [30, 30],
-    iconAnchor: [15, 15],
+    iconUrl: "/boat.svg",
+    iconSize: [25, 25],
+    iconAnchor: [20, 15],
     popupAnchor: [0, -15],
   });
 
@@ -164,11 +164,12 @@ const MapLayer = () => {
         >
           <input
             type="checkbox"
+            className="accent-violet-600"
             id="showPorts"
             checked={showPorts}
             onChange={handleShowPortsChange}
           />
-          <span style={{ marginLeft: "5px" }}>Ports</span>
+          <span style={{ marginLeft: "5px" }}>Yards</span>
         </label>
         <label
           className="checkbox"
@@ -180,6 +181,7 @@ const MapLayer = () => {
         >
           <input
             type="checkbox"
+            className="accent-black"
             id="showVessels"
             checked={showVessels}
             onChange={handleShowVesselsChange}
