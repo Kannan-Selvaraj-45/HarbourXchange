@@ -99,9 +99,14 @@ const About = () => {
         transition={{ duration: 0.8 }}
         className="container mx-auto px-4 py-16"
       >
-        <h1 className="text-4xl md:text-5xl font-bold text-center text-blue-800 mb-12">
+        <motion.h1 
+          className="text-4xl md:text-5xl font-bold text-center text-blue-800 mb-12"
+          initial={{ scale: 0.5, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ type: "spring", stiffness: 100, delay: 0.2 }}
+        >
           The HarbourXChange Journey
-        </h1>
+        </motion.h1>
 
         <div className="relative wrap overflow-hidden p-10 h-full">
           <div className="border-2-2 absolute border-opacity-20 border-gray-700 h-full border left-1/2"></div>
@@ -117,14 +122,18 @@ const About = () => {
               transition={{ duration: 0.5, delay: index * 0.2 }}
             >
               <div className="order-1 w-5/12"></div>
-              <div className="z-20 flex items-center order-1 bg-gray-800 shadow-xl w-8 h-8 rounded-full">
+              <motion.div 
+                className="z-20 flex items-center order-1 bg-gray-800 shadow-xl w-8 h-8 rounded-full"
+                whileHover={{ scale: 1.2, rotate: 360 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
                 <h2 className="mx-auto my-auto font-semibold text-xs text-white">
                   {event.year}
                 </h2>
-              </div>
+              </motion.div>
               <motion.div
                 className="order-1 bg-gray-100 rounded-lg shadow-xl w-5/12 px-6 py-4"
-                whileHover={{ scale: 1.03 }}
+                whileHover={{ scale: 1.03, boxShadow: "0px 0px 8px rgb(0,0,0,0.2)" }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
                 <h3 className="mb-3 font-bold text-gray-800 text-xl">
@@ -145,11 +154,21 @@ const About = () => {
         transition={{ delay: 0.8, duration: 0.8 }}
         className="container mx-auto px-4 py-16 bg-white rounded-lg shadow-xl"
       >
-        <h2 className="text-3xl font-bold text-center text-blue-800 mb-8">
+        <motion.h2 
+          className="text-3xl font-bold text-center text-blue-800 mb-8"
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ type: "spring", stiffness: 100, delay: 1 }}
+        >
           We Are Spread All Across India
-        </h2>
+        </motion.h2>
         <div className="flex flex-col lg:flex-row items-center justify-between space-y-8 lg:space-y-0 lg:space-x-8">
-          <div className="w-full lg:w-1/2 h-[400px] rounded-lg overflow-hidden shadow-xl">
+          <motion.div 
+            className="w-full lg:w-1/2 h-[400px] rounded-lg overflow-hidden shadow-xl"
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ type: "spring", stiffness: 100, delay: 1.2 }}
+          >
             {isClient && (
               <MapContainer
                 center={mapCenter}
@@ -168,7 +187,7 @@ const About = () => {
                 {activeCity && <SetViewOnClick coords={activeCity.coords} />}
               </MapContainer>
             )}
-          </div>
+          </motion.div>
           <div className="w-full lg:w-1/2 grid grid-cols-2 sm:grid-cols-3 gap-4">
             {cities.map((city, index) => (
               <motion.button
@@ -179,11 +198,11 @@ const About = () => {
                     : "bg-gray-200 text-gray-800 hover:bg-gray-500 hover:text-white"
                 }`}
                 onClick={() => handleCityClick(city)}
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.05, boxShadow: "0px 0px 8px rgb(0,0,0,0.2)" }}
                 whileTap={{ scale: 0.95 }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.2 + index * 0.1, duration: 0.5 }}
+                transition={{ delay: 1.2 + index * 0.1, duration: 0.5, type: "spring", stiffness: 100 }}
               >
                 <i
                   className="fas fa-map-marker-alt mr-2"
@@ -208,9 +227,9 @@ const About = () => {
             <motion.div
               className="bg-white p-6 rounded-lg max-w-sm w-full"
               onClick={(e) => e.stopPropagation()}
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
+              initial={{ scale: 0.9, opacity: 0, y: 50 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 50 }}
               transition={{ type: "spring", damping: 20, stiffness: 300 }}
             >
               <h3 className="text-2xl font-bold mb-4">{activeCity.name}</h3>
@@ -219,12 +238,14 @@ const About = () => {
                 a key point in our network across India. Here, we work
                 tirelessly to enhance marine operations and connectivity.
               </p>
-              <button
+              <motion.button
                 className="mt-4 bg-gray-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors"
                 onClick={() => setActiveCity(null)}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
                 Close
-              </button>
+              </motion.button>
             </motion.div>
           </motion.div>
         )}
@@ -234,3 +255,4 @@ const About = () => {
 };
 
 export default About;
+

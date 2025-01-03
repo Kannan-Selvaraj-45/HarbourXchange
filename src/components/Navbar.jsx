@@ -13,7 +13,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="nav-container fixed-top" id="nav">
+      <nav className="nav-container  bg-gradient-to-l from-gray-500 to-gray-800 fixed-top" id="nav">
         <div className="d-flex justify-content-start">
           <a href="" className="new-logo">
             <img

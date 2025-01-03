@@ -43,7 +43,7 @@ const Cargo = () => {
         <div className=" flex justify-start items-center p-4 ">
           <Link
             to="/services"
-            className="bg-gradient-to-r from-inherit to-white text-black decoration-transparent  p-3 rounded-full flex items-center justify-center mr-4"
+            className="bg-gradient-to-r from-white to-red text-black decoration-transparent  p-3 rounded-full flex items-center justify-center mr-4"
           >
             <i className="fa-solid fa-arrow-left-long text-xl"></i>
           </Link>

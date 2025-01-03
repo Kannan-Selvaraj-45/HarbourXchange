@@ -59,9 +59,9 @@ const VesselManagement = () => {
         <div className="flex justify-start items-center p-4">
           <Link
             to="/services"
-            className="bg-gradient-to-r from-yellow-400 to-orange-500 decoration-transparent text-black  p-3 rounded-full flex items-center justify-center mr-4"
+            className="bg-gradient-to-r from-white to-red text-black decoration-transparent  p-3 rounded-full flex items-center justify-center mr-4"
           >
-            <i className="fa-solid fa-arrow-left-long text-xl "></i>
+            <i className="fa-solid fa-arrow-left-long text-xl"></i>
           </Link>
           <motion.h1
             className="text-4xl md:text-5xl font-bold text-center text-blue-800 flex-1"

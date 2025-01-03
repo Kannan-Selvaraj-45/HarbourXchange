@@ -40,7 +40,7 @@ const Market = () => {
   return (
     <div className="bg-gradient-to-b from-blue-100 to-white min-h-screen pt-20 mt-20 mb-10">
       <div className="container mx-auto px-4">
-      <div className=" flex justify-start items-center p-4 ">
+        <div className=" flex justify-start items-center p-4 ">
           <Link
             to="/services"
             className="bg-gradient-to-r from-white to-red text-black decoration-transparent  p-3 rounded-full flex items-center justify-center mr-4"
