@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
@@ -85,11 +86,11 @@ const About = () => {
     },
   ];
 
-  const handleCityClick = (city) => {
-    setActiveCity(city);
-    setMapCenter(city.coords);
-    setMapZoom(10);
-  };
+  // const handleCityClick = (city) => {
+  //   setActiveCity(city);
+  //   setMapCenter(city.coords);
+  //   setMapZoom(10);
+  // };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-100 to-white mt-5 pt-5">
@@ -99,7 +100,7 @@ const About = () => {
         transition={{ duration: 0.8 }}
         className="container mx-auto px-4 py-16"
       >
-        <motion.h1 
+        <motion.h1
           className="text-4xl md:text-5xl font-bold text-center text-blue-800 mb-12"
           initial={{ scale: 0.5, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
@@ -122,7 +123,7 @@ const About = () => {
               transition={{ duration: 0.5, delay: index * 0.2 }}
             >
               <div className="order-1 w-5/12"></div>
-              <motion.div 
+              <motion.div
                 className="z-20 flex items-center order-1 bg-gray-800 shadow-xl w-8 h-8 rounded-full"
                 whileHover={{ scale: 1.2, rotate: 360 }}
                 transition={{ type: "spring", stiffness: 300 }}
@@ -133,7 +134,10 @@ const About = () => {
               </motion.div>
               <motion.div
                 className="order-1 bg-gray-100 rounded-lg shadow-xl w-5/12 px-6 py-4"
-                whileHover={{ scale: 1.03, boxShadow: "0px 0px 8px rgb(0,0,0,0.2)" }}
+                whileHover={{
+                  scale: 1.03,
+                  boxShadow: "0px 0px 8px rgb(0,0,0,0.2)",
+                }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
                 <h3 className="mb-3 font-bold text-gray-800 text-xl">
@@ -154,7 +158,7 @@ const About = () => {
         transition={{ delay: 0.8, duration: 0.8 }}
         className="container mx-auto px-4 py-16 bg-white rounded-lg shadow-xl"
       >
-        <motion.h2 
+        <motion.h2
           className="text-3xl font-bold text-center text-blue-800 mb-8"
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -163,7 +167,7 @@ const About = () => {
           We Are Spread All Across India
         </motion.h2>
         <div className="flex flex-col lg:flex-row items-center justify-between space-y-8 lg:space-y-0 lg:space-x-8">
-          <motion.div 
+          <motion.div
             className="w-full lg:w-1/2 h-[400px] rounded-lg overflow-hidden shadow-xl"
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -197,12 +201,20 @@ const About = () => {
                     ? "bg-gray-600 text-white"
                     : "bg-gray-200 text-gray-800 hover:bg-gray-500 hover:text-white"
                 }`}
-                onClick={() => handleCityClick(city)}
-                whileHover={{ scale: 1.05, boxShadow: "0px 0px 8px rgb(0,0,0,0.2)" }}
+                // onClick={() => handleCityClick(city)}
+                whileHover={{
+                  scale: 1.05,
+                  boxShadow: "0px 0px 8px rgb(0,0,0,0.2)",
+                }}
                 whileTap={{ scale: 0.95 }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.2 + index * 0.1, duration: 0.5, type: "spring", stiffness: 100 }}
+                transition={{
+                  delay: 1.2 + index * 0.1,
+                  duration: 0.5,
+                  type: "spring",
+                  stiffness: 100,
+                }}
               >
                 <i
                   className="fas fa-map-marker-alt mr-2"
@@ -255,4 +267,3 @@ const About = () => {
 };
 
 export default About;
-

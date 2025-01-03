@@ -87,19 +87,19 @@ const MapLayer = () => {
         maxZoom={19}
         whenCreated={setMap}
       >
-        {/* <TileLayer
+        <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        /> */}
+        />
 
         {/* <TileLayer
           url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
           attribution='&copy; <a href="https://carto.com/">CARTO</a>'
         /> */}
-        <TileLayer
+        {/* <TileLayer
           url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
           attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>'
-        />  
+        />   */}
         {/* <TileLayer
           url="https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.cyclosm.org/">CyclOSM</a> contributors'
